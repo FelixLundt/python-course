@@ -326,7 +326,7 @@ with tempfile.NamedTemporaryFile() as tmp:
     # Download to temp file
     bucket.blob('my-folder/model.pt').download_to_filename(tmp.name)
     # Load model
-    model.load_state_dict(torch.load(tmp.name)
+    model.load_state_dict(torch.load(tmp.name))
     
 ```
 You first need to save files locally, before uploading them to the bucket. In principle, you could do this anywhere, or in a `/tmp` folder (if your OS has one). 
@@ -337,6 +337,9 @@ Using the `tempfile` module has several advantages:
 - Thread-safe
 - Automatic cleanup (can be disabled)
 
+##### Accessing your bucket from Google Colab Notebooks
+
+You can use the commands from the previous two sections to access your cloud storage from a colab notebook. Check [this](https://colab.research.google.com/notebooks/snippets/gcs.ipynb) for a detailed code snippet on how to do this.
 
 ## Working with Vertex AI notebooks
 
