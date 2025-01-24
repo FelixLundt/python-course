@@ -27,4 +27,9 @@
 - Pytest-cov
    https://pytest-cov.readthedocs.io/en/latest/readme.html
 - Useful numpy function: numpy.lib.stride_tricks.sliding_window_view 
-- Interesting course for [SE in research](https://alan-turing-institute.github.io/rse-course/html/index.html)
+- There are more concepts out there that might be worth checking out in more detail (I haven't done so myself yet). See the following links for more information:
+	* [Contract programming](https://www.hillelwayne.com/post/contracts/)
+ 	* [Property-based testing](https://www.hillelwayne.com/post/hypothesis-oracles/)
+ 	* [PBT + Contracts](https://www.hillelwayne.com/post/pbt-contracts/)
+ 	* [PBT for numpy](https://hypothesis.readthedocs.io/en/latest/numpy.html)
+ 	* [Hypothesis library for PBT](https://hypothesis.works/)
