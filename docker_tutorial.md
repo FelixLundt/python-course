@@ -839,164 +839,125 @@ ENV API_KEY=${API_KEY}
 
 ### Development Workflow Tips
 
-VS Code is really good at supporting development inside a container. This is most efficient with the Dev Containers extension. Below, I'll show you a minimal working example that you can adapt to your needs. You can check out the VS Code tutorial [here](https://code.visualstudio.com/docs/devcontainers/tutorial), and a tutorial on YouTube [here](https://www.youtube.com/watch?v=6OxqiEeCvMI).
+VS Code is really good at supporting development inside a container. This is most efficient with the Dev Containers extension. Below, I'll show you a minimal working example that you can adapt to your needs. However, there are many ways to set this up. For more info, you can check out the VS Code tutorial [here](https://code.visualstudio.com/docs/devcontainers/tutorial) and a tutorial on YouTube [here](https://www.youtube.com/watch?v=6OxqiEeCvMI).
 
+This works in two steps:
+
+- Containerize your code:
+    - Create a `Dockerfile` to build an image including source code & dependencies
+    - Create a `docker-compose.yml` to specify how to run the development container
+- Set up VS Code & the Dev Containers extension to actually run the container
 
 #### Example codebase
 
-Here's a really silly example code base to try tests
+Here's a really silly example code base to show how to set up a docker-based development environment. It's a simple Python project with a package, a script, and a test, and relies on an external package (numpy).
+
+```bash
+docker-demo-project
+├── useful_package/
+│   ├── __init__.py  
+│   ├── useful_code.py  # Contains function `foo`
+├── main.py             # Script to run function `foo`
+├── tests/
+│   ├── test_useful_code.py  # Contains simple test of `foo`
+```
+
+For completeness, here is the content of the files:
+```python
+# useful_package/__init__.py
+from .useful_code import foo
+```
+
+```python
+# useful_package/useful_code.py
+import numpy as np
+
+def foo():
+    arr = np.array(['H', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd', '!'])
+    return arr
+```
+
+```python
+# main.py
+from useful_package import foo
+
+print(foo())
+```
+
+```python
+# tests/test_useful_code.py
+import numpy as np
+from useful_package import foo
+
+def test_foo():
+    actual_list = []
+    for char in "Hello, world!":
+        actual_list.append(char)
+    assert np.array_equal(foo(), np.array(actual_list))
+```
+
 
 #### Setting Up Development Container
-Create a `Dockerfile` in your project root:
+
+1. Add a `requirements.txt` file to your project root:
+```
+numpy
+```
+
+2. Create a `Dockerfile` in your project root:
 ```dockerfile
-FROM python:3.9-slim
+FROM python:3.12-slim
 
 WORKDIR /workspace
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install development tools
+# Install development tools -- I like this to be in the dockerfile explicitly, instead of 'hidden' in the requirements.txt
 RUN pip install pytest pytest-watch debugpy
 
 # Keep container running for development
 CMD ["tail", "-f", "/dev/null"]
 ```
 
-Create a `docker-compose.yml` for development:
+3. Create a `docker-compose.yml` for development:
 ```yaml
 services:
   dev:
     build: .
     volumes:
-      - .:/workspace  # Note that this is a bind mount
+      - .:/workspace  # Note that this is a bind mount - changes to files on host are reflected in container (and vice versa)
+
     # Enable debugging
     ports:
       - "5678:5678"  # for debugpy
 ```
 
 #### VS Code Integration
+
 1. Install "Dev Containers" extension in VS Code (more on Dev Containers below)
-2. Create `.devcontainer/devcontainer.json`:
-```json
-{
-    "name": "Connect4 Agent Development",
-    "dockerComposeFile": "../docker-compose.yml",
-    "service": "dev",
-    "workspaceFolder": "/workspace",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-python.python",
-                "ms-python.vscode-pylance"
-            ],
-            "settings": {
-                "python.testing.pytestEnabled": true,
-                "python.testing.unittestEnabled": false,
-                "python.testing.pytestArgs": [
-                    "tests"
-                ]
-            }
-        }
-    }
-}
-```
+2. Configure the dev container
+    1. Click on the 'Open a Remote Window' button (the blue button with vertically shifted > and < symbols) and select 'Add Dev Container Configuration Files' or go to the command palette and run 'Dev Containers: Add Dev Container Configuration Files'
+    2. Select 'Add configuration to workspace'
+    3. Select 'From 'docker-compose.yml'
+    4. Select any Features you want to enable (I don't think you need any) and click 'OK'
+    5. Select any optional files/directories to mount (I don't think you need any) and click 'OK'
 
-#### Development Workflow
-1. Open project in container:
-   - VS Code: Click "Reopen in Container" when prompted
-   - Everything runs inside container but feels local
+    This will add a `.devcontainer` folder to your project root with a `devcontainer.json` file, and another `docker-compose.yml` file (don't worry, this builds on the one you already have and doesn't interfere with it).
+    You can leave the new `docker-compose.yml` file as is. The `devcontainer.json` file gives you lots of options for customizing the dev container. You could specify VS Code extensions to install, for instance. However, you can also do this later once the container is running. You could consider changing the name of the dev container to something more descriptive (for me, it defaulted to 'Existing Docker Compose (Extend)', which is rather cumbersome).
+3. Use the VS Code inside the container
+    - Start the container by using the bottom left button or the command palette to 'Reopen in Container' (you are probably already prompted to do this).
+    - A new VS Code window will open inside the container (you can see this in the bottom left corner of the window, and in the built-in terminal).
+    - Install Python and other extensions you need (most likely you'll also be prompted to install the Python extension). You can set up VS Code as if you had installed it fresh locally. You only need to do this once.
+    - You can now use VS Code inside the container. Try running `pytest tests/` on the command line, or running `main.py`.
+    - Testing and debugging should also work as expected, including debugging tests.
+    - Note that any file changes you make in the container are reflected in the host filesystem, and vice versa.
 
-2. Develop agents:
-```bash
-project/
-├── agents/
-│   ├── agent_minimax/  # Your minimax agent
-│   ├── agent_mcts/     # Your MCTS agent
-│   └── common.py       # Shared utilities
-├── game_utils.py       # Game logic
-├── main.py            # Main game runner
-└── tests/            # Your test files
-```
-
-3. Run tests:
-   - Use VS Code's Test Explorer
-   - Or run in terminal:
-   ```bash
-   pytest tests/
-   pytest tests/test_minimax_agent.py  # specific file
-   ```
-
-4. Debug your code:
-   - Set breakpoints in VS Code
-   - Use VS Code's Run and Debug panel
-   - Create `.vscode/launch.json`:
-   ```json
-    {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Current File",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": false,
-        }
-    ]
-    }
-   ```
-
-5. Live development:
-   - Code changes are immediate (bind mount)
-   - Tests run in container
-   - Debugging works like local
-   - All dependencies contained
-
-#### Tips
-- Use `pytest-watch` for continuous testing:
-  ```bash
-  ptw tests/  # auto-run tests on changes
-  ```
-- Debug specific agents:
-  ```bash
-  # In launch.json configurations
-  "args": ["--agent1=minimax", "--depth=3"]
-  ```
-- Share container between team members:
-  ```bash
-  docker-compose up -d  # Start development container
-  docker-compose exec dev bash  # Enter container
-  ```
-
-#### VS Code Dev Containers
-
-The Dev Containers extension provides:
-1. **Integrated Development**:
-   - Code completion works inside container
-   - Debugging works seamlessly
-   - Terminal opens inside container
-   - Git integration works
-
-2. **Automatic Container Management**:
-   - Starts container when you open project
-   - Handles port forwarding
-   - Mounts source code automatically
-   - Installs VS Code server in container
-
-Without Dev Containers:
-1. Start container manually
-2. Configure VS Code to connect to Python in container
-3. Set up debugger configuration
-4. Configure port forwarding
-5. Mount volumes correctly
-
-With Dev Containers:
-1. Open folder in VS Code
-2. Click "Reopen in Container"
-3. Everything just works
+And this should do it! You should now be able to use VS Code inside the container just like you would locally. Note that this would work even without having installed Python locally!
 
 
-### Common Pitfalls
+
+### Unordered List of Common Pitfalls and Tips
+
 - Not cleaning up unused containers/images
 - Ignoring container logs
 - Running everything as root
@@ -1036,14 +997,10 @@ docker image prune
 docker volume prune
 ```
 
-## 6. Practical Exercises
-- Building a web application
-- Working with databases
-- Debugging containers
-- Multi-container applications
 
-## 7. Next Steps
-- Container orchestration (brief intro to Kubernetes)
+## 7. Advanced topics you might want to look into
+
+- Container orchestration
 - CI/CD integration
 - Production considerations
 - Further learning resources
