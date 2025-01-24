@@ -53,4 +53,8 @@ Files:
     |-> week 11
     |   |-> info_week_11.md
     |   |-> google_cloud_platform.md
+    |-> week 13
+    |   |-> info_week_13.md
+    |   \-> docker_tutorial.md
+    
     ```
