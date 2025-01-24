@@ -1,0 +1,1 @@
+- [ ] To round out the course, include a brief 'Get started with Python' lesson going into how to use Python, virtual environments.. (overlap with content in first week)
