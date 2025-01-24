@@ -1,1 +1,4 @@
 - [ ] To round out the course, include a brief 'Get started with Python' lesson going into how to use Python, virtual environments.. (overlap with content in first week)
+- [ ] think about structure of this repo. Two choices:
+    - Keep structure flat. Most stuff can be moved around, and the flat structure illustrates that
+    - Introduce weekly subfolders. Might look more organized, but also less flexible
