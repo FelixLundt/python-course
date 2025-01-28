@@ -330,13 +330,15 @@ C --> |docker push| G[Docker Registry]
 
 
 ### 3.1 Understanding the Docker Ecosystem
-- Relationship between:
-  - Source code
-  - Dockerfile
-  - Docker image
-  - Docker container
-- Image layers and caching
-- Docker registries
+
+#### Relationship between Components
+The Docker ecosystem consists of four main components that work together. Your **source code** and its dependencies are defined in a **Dockerfile**, which acts as a recipe for building a **Docker image**. This image is like a template or snapshot that contains everything needed to run your application. When you run an image, Docker creates a **container**, which is a running instance of that image - similar to how a running program is an instance of its executable file.
+
+#### Image Layers and Caching
+Docker images are built in layers, where each instruction in your Dockerfile creates a new layer. This layered approach allows Docker to cache unchanged layers during rebuilds, making the build process much faster when you only change a small part of your application.
+
+#### Docker Registries
+Docker registries are like GitHub for Docker images - they're places where you can store and share Docker images. Docker Hub is the most popular public registry, containing official images for programming languages, databases, and other tools that you can use as base images for your own containers.
 
 ### 3.2 Your First Docker Project
 
@@ -544,20 +546,14 @@ docker run -d -p 5000:5000 my-flask-app
 
 #### Common Issues and Solutions
 
-1. **Port already in use**
-```bash
-docker ps  # Find running containers
-docker stop <container_id>
-```
-
-2. **Changes not appearing**
+1. **Changes not appearing**
 - Make sure you rebuilt the image
 - Check you're using the latest image
 - Verify the container was restarted
 
-3. **Container exits immediately**
+2. **Container exits immediately**
 - Check logs: `docker logs <container_id>`
-- Ensure CMD is correct in Dockerfile
+- Make sure Dockerfile commands are correct
 - Verify app isn't crashing
 
 #### Docker Run Options Reference
