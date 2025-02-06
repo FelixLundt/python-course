@@ -1,0 +1,1 @@
+This week, we'll have a workshop on how to make a poster. For more information about the poster session and the final presentation, see the 'Final Presentation' assignment towards the top of the course page.

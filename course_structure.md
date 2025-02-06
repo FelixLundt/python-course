@@ -18,6 +18,8 @@ Files:
 -> course_info.md
 -> info_proposal_presentation.md
 -> info_submission_prototype.md
+-> info_final_presentation.md
+-> info_final_submission.md
 -> public_resources.md
 -> week-to-week-content
     |-> week_1
@@ -55,8 +57,14 @@ Files:
     |-> week 11
     |   |-> info_week_11.md
     |   |-> google_cloud_platform.md
-    |-> week 13
-    |   |-> info_week_13.md
-    |   \-> docker_tutorial.md
-    
+    |-> week 14
+    |   |-> info_week_14.md
+    |   |-> docker_tutorial.md
+    |   |-> info_final_submission.md
+    |   |-> info_final_presentation.md
+    |   \-> slides.pdf
+    |-> week 15
+    |   |-> info_week_15.md
+    |   |-> poster_workshop.md (not finished yet)
+    |   \-> slides.pdf
     ```
