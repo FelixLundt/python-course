@@ -39,6 +39,7 @@ However, there are a few things that could be improved:
 - Bad naming: Names like `x` and `y` are not very expressive. It takes a moment to realize what they represent and to make sure everything is consistent.
 - Complicated structure: There are two nested loops with conditionals inside them. Of course it's not hard to see what they do in this case, but this is not the simplest way to communicate what is happening.
 - Hard-coded values: The loops' ranges are just bare numbers, instead of using `BOARD_COLS` and `BOARD_ROWS`. The same is true for the values of the pieces on the board (the variables of type `BoardPiece`).
+- It would be even better to just iterate over the board array directly (i.e., `for row in board[::-1, :]; for piece in row`), instead of using the two loops.
 - The delimiter line `|=============|\n` should be a variable, which can be reused, instead of being repeated.
 - The updates to the variable `board_string` in lines 31 and 32 are inconsistent and could be put in one line. This should be a simple 'put everything together line', but it doesn't read that way.
 

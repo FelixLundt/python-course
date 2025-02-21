@@ -11,15 +11,13 @@ Week 8: proposal presentations, feedback
 Week 9: help with projects, 1 proposal presentation, feedback
 Week 10: help with projects, profiling & benchmarking
 Week 11: intro to Google Cloud Platform, help with projects, make sure every group is up and running
-Week 13: Docker tutorial (basics, basic usage, setting up development environment)
+Week 13/14: Docker tutorial (basics, basic usage, setting up development environment)
+Week 14: Info about final submission, final presentation
+Week 15: poster workshop
 
 Files:
 ```
 -> course_info.md
--> info_proposal_presentation.md
--> info_submission_prototype.md
--> info_final_presentation.md
--> info_final_submission.md
 -> public_resources.md
 -> week-to-week-content
     |-> week_1
@@ -43,12 +41,14 @@ Files:
     |   |-> info_week_4.md
     |   |-> debugging.md
     |   |-> code_quality_example.md
+    |   |-> info_submission_prototype.md
     |   \-> slides.pdf
     |-> week 6
     |   |-> info_week_6.md
     |   |-> phase_2_background.md
     |   \-> slides.pdf
     |-> week 7
+    |   |-> info_proposal_presentation.md
     |   \-> slides.pdf
     |-> week 10
     |   |-> info_week_10.md
