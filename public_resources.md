@@ -14,7 +14,7 @@ Both of those are standard references and I strongly encourage you to read them.
 - YouTube channels by [Arjan Codes](https://www.youtube.com/@ArjanCodes), [James Murphy](https://www.youtube.com/c/mCodingWithJamesMurphy) and [Corey Schafer](https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g) for Python in general (Tips & Tricks, Object-Oriented Programming, ...)
 
 
-#### Software
+#### Software/Tools
 
 ##### IDEs
 - [VS Code](https://code.visualstudio.com/)
@@ -22,6 +22,10 @@ Both of those are standard references and I strongly encourage you to read them.
 
 ##### Python
 - [Anaconda](https://www.anaconda.com/products/distribution) (Python distribution including the [conda](https://docs.conda.io/projects/conda/en/latest/index.html#) package & environment manager)
+
+#### Virtual environments/dependency management
+- [`virtualenv`](https://virtualenv.pypa.io/en/latest/)
+- [`uv`](https://docs.astral.sh/uv/)
 
 
 
@@ -46,7 +50,7 @@ Both of those are standard references and I strongly encourage you to read them.
 
 ##### Software carpentry
 
-- [Virtual Environments](https://realpython.com/python-virtual-environments-a-primer/)
+- [Virtual Environments](https://realpython.com/python-virtual-environments-a-primer/) (`venv`, `virtualenv`, `conda`)
 - Git/Version Control
      - [Pro Git Book](https://git-scm.com/book/en/v2) 
      - [Tutorial-style intro 1](https://swcarpentry.github.io/git-novice/) and [intro 2](https://education.molssi.org/python-package-best-practices/)
