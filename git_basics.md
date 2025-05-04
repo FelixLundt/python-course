@@ -87,12 +87,17 @@ Congratulations, you've just published your code on GitHub!
 
 You can untrack files by running `git rm --cached <filename>` or `git rm -r --cached <dirname>`, and then commiting the changes. This will not delete your local copy, but might lead to deletion of those files for other users that pull the commit from your repository. So only do this if no one has cloned your repo yet, or if you don't care that it deletes the file for other users.
 
-## Further reading on Git
+## Practice and further reading on Git
 
 The basic git workflow is pretty straightforward: Make changes in your working directory, stage those changes (`git add <filename>`), commit them to your local repo (`git commit -m "<useful message>"`), push them to the remote (`git push`). Unfortunately, things can get more complicated, especially when collaborating with others.
 
-I highly recommend you read the git book, [found here](https://git-scm.com/book). In particular, I would encourage you to read [Chapter 10. Git Internals](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain) and actually run the commands they use in their examples. Having a basic familiarity with the internals of git is fantastically illuminating and will help you understand *why* certain git commands are necessary, and what they're doing under the covers.
+In order to get more practice, there are two (somewhat) interactive tutorials you can check out:
 
-### Line endings and Git
+1. [https://learngitbranching.js.org/](https://learngitbranching.js.org/) - More surface-level, more visual
+2. [https://githowto.com/](https://githowto.com/) - More detailed, more text-based
+
+I also highly recommend you read the git book, [found here](https://git-scm.com/book). In particular, I would encourage you to read [Chapter 10. Git Internals](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain) and actually run the commands they use in their examples. Having a basic familiarity with the internals of git is fantastically illuminating and will help you understand *why* certain git commands are necessary, and what they're doing under the covers.
+
+## Line endings and Git
 
 If you're working on Windows, or you store your code on an NTFS (Windows) partition, be sure to read [this](https://help.github.com/en/github/using-git/configuring-git-to-handle-line-endings).

@@ -54,7 +54,7 @@ Both of those are standard references and I strongly encourage you to read them.
 - Git/Version Control
      - [Pro Git Book](https://git-scm.com/book/en/v2) 
      - [Tutorial-style intro 1](https://swcarpentry.github.io/git-novice/) and [intro 2](https://education.molssi.org/python-package-best-practices/)
-     - Git game  https://learngitbranching.js.org/
+     - Interactive tutorials: [1](https://learngitbranching.js.org/) and [2](https://githowto.com/)
      - Section in [Course](https://merely-useful.tech/py-rse/)
      - [Videos](https://www.youtube.com/results?search_query=computerphile+git) on Computerphile YouTube channel
  - Documentation
