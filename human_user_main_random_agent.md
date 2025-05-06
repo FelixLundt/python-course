@@ -32,6 +32,7 @@ def convert_str_to_action(input_move_string: str) -> PlayerAction | None:
     try:
         input_move = PlayerAction(input_move_string)
     except ValueError:
+        input_move = None
         print('Invalid move: Input must be an integer.')
         print('Try again.')
     return input_move
