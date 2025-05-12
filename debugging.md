@@ -20,3 +20,74 @@ Particularly important sections of the documentation are:
  * [Viewing as Array or DataFrame](https://www.jetbrains.com/help/pycharm/viewing-as-array.html)
 
 In VS Code, there is a plethora of settings you can tweak, but the debugger should work quite well out of the box. I recommend skipping the settings as far as possible for the beginning. You find the documentation and a tutorial [here](https://code.visualstudio.com/docs/python/debugging) and [there](https://code.visualstudio.com/docs/python/python-tutorial#_configure-and-run-the-debugger).
+
+
+### Example scripts
+
+Here are the two scripts I used during the tutorial to show you the basic workings of a debugger, in case you want to practice.
+
+##### Square roots
+
+```python
+import math
+
+
+class Solver:
+
+    def demo(self, a, b, c):
+        """
+        Solves a * x^2 + b * x + c = 0
+        """
+        d = b ** 2 - 4 * a * c
+        if d > 0:
+            disc = math.sqrt(d)
+            root1 = (-b + disc) / (2 * a)
+            root2 = (-b - disc) / (2 * a)
+            return root1, root2
+        elif d == 0:
+            return -b / (2 * a)
+        else:
+            return "This equation has no (real) roots"
+
+
+if __name__ == '__main__':
+    solver = Solver()
+
+    while True:
+        a = int(input("a: "))
+        b = int(input("b: "))
+        c = int(input("c: "))
+        result = solver.demo(a, b, c)
+        print(result)
+
+```
+
+##### Estimate pi
+
+```python
+import numpy as np
+
+
+class PiEstimator:
+
+    def __init__(self, number_darts):
+        self.darts = number_darts
+        self.counter = 0
+        self.pi_estimate = None
+
+    def estimate(self):
+        for _ in range(self.darts):
+            x, y = np.random.rand(2)
+            rad = np.sqrt(x**2 + y**2)
+            if rad <= 1.:
+                self.counter += 1
+
+        self.pi_estimate = 4 * self.counter / self.darts
+        print('Estimated value of Pi after {} darts: {:5f}'.format(self.darts, self.pi_estimate))
+
+
+if __name__ == '__main__':
+    estimator = PiEstimator(10000)
+    estimator.estimate()
+
+```
