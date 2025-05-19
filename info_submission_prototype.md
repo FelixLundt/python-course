@@ -2,7 +2,7 @@
 
 The main goal for the prototype is the following:
 
-- A functioning, correctly implemented agent using either minimax or MCTS (alpha-beta pruning would be great, but isn't essential)
+- A functioning, correctly implemented agent using either minimax (alpha-beta pruning would be great, but isn't essential) or MCTS
 - Clean, readable, maintainable code
 - Tested code
 - Documented code
